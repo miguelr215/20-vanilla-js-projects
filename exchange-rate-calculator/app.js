@@ -22,11 +22,18 @@ function calculate() {
     })
     .then((data) => {
       let conversionRate = data.conversion_rate;
-      rateEl.innerText = conversionRate;
-      amountEl_two.value =
-        Math.round(100 * (amountEl_one.value * conversionRate)) / 100;
+      rateEl.innerText = `1 ${currency_one} = ${conversionRate} ${currency_two}`;
+      amountEl_two.value = (amountEl_one.value * conversionRate).toFixed(2);
     })
     .catch((error) => alert(`Oops something went wrong: ${error.message}`));
+}
+
+// Swap currencies on button click
+function swapCurrencies() {
+  let temp = currencyEl_one.value;
+  currencyEl_one.value = currencyEl_two.value;
+  currencyEl_two.value = temp;
+  calculate();
 }
 
 // Event listenders
@@ -34,5 +41,6 @@ currencyEl_one.addEventListener("change", calculate);
 amountEl_one.addEventListener("input", calculate);
 currencyEl_two.addEventListener("change", calculate);
 amountEl_two.addEventListener("input", calculate);
+swap.addEventListener("click", swapCurrencies);
 
 calculate();
