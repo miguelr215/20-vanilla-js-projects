@@ -19,9 +19,14 @@ p {
   color: #777;
 }
 
+.main__container {
+  margin: 10px auto;
+}
+
 .project__container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .card {
